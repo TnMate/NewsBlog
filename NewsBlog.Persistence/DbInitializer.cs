@@ -16,7 +16,25 @@ namespace NewsBlog.Persistence
 
             // adatfeltöltés
 
+
+            
             context.SaveChanges();
+        }
+
+        private static void SeedArticles()
+        {
+
+            var articles = new Article[]
+            {
+                new Article {Title = "Cavallino"},
+                new Article {Title = "Lido di Jesolo"},
+            };
+            foreach (Article c in articles)
+            {
+                _context.Cities.Add(c);
+            }
+
+            _context.SaveChanges();
         }
 
     }

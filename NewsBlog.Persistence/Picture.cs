@@ -12,6 +12,8 @@ namespace NewsBlog.Persistence
         [ForeignKey("Article")]
         public Article ArticleId { get; set; }
 
-        public Byte[] Pic {get;set;}
+        public byte[] ImageSmall { get; set; }
+
+        public byte[] ImageLarge { get; set; }
     }
 }
