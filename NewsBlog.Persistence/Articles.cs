@@ -2,7 +2,7 @@
 
 namespace NewsBlog.Persistence
 {
-    public class News
+    public class Articles
     {
     }
 }
