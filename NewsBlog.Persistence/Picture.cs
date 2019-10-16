@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,8 +10,12 @@ namespace NewsBlog.Persistence
         [Key]
         public int Id { get; set; }
 
-        [ForeignKey("Article")]
-        public Article ArticleId { get; set; }
+        [Required]
+        [DisplayName("Article")]
+        //[ForeignKey("Article")]
+        public int ArticleId { get; set; }
+
+        public Article Article { get; set; }
 
         public byte[] ImageSmall { get; set; }
 
