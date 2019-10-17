@@ -133,7 +133,10 @@ namespace NewsBlog.Persistence
                     Leading = false
                 }
             };
-            
+
+            foreach (Article article in defaultArticless)
+                context.Articles.Add(article);
+
             context.SaveChanges();
         }
 
