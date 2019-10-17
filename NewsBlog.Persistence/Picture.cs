@@ -12,7 +12,6 @@ namespace NewsBlog.Persistence
 
         [Required]
         [DisplayName("Article")]
-        //[ForeignKey("Article")]
         public int ArticleId { get; set; }
 
         public Article Article { get; set; }
