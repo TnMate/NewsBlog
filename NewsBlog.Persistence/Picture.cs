@@ -16,8 +16,8 @@ namespace NewsBlog.Persistence
 
         public Article Article { get; set; }
 
-        public byte[] ImageSmall { get; set; }
+        public byte[] Image { get; set; }
 
-        public byte[] ImageLarge { get; set; }
+        //public byte[] ImageLarge { get; set; }
     }
 }

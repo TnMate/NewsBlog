@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Linq;
+using System.IO;
 using System.Collections.Generic;
 
 namespace NewsBlog.Persistence
 {
     public static class DbInitializer
     {
-        public static void Initialize(NewsBlogContext context)
+        public static void Initialize(NewsBlogContext context, string imageDirectory = null)
         {
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
@@ -18,7 +19,9 @@ namespace NewsBlog.Persistence
 
             // adatfeltöltés
 
-            IList<Article> defaultArticless = new List<Article>
+            #region Articles
+
+            IList<Article> defaultArticles = new List<Article>
             {
                 new Article
                 {
@@ -134,8 +137,57 @@ namespace NewsBlog.Persistence
                 }
             };
 
-            foreach (Article article in defaultArticless)
+            foreach (Article article in defaultArticles)
                 context.Articles.Add(article);
+
+            #endregion
+
+            #region Pictures
+
+            if (imageDirectory != null && Directory.Exists(imageDirectory))
+            {
+                IList<Picture> defaultPictures = new List<Picture>();
+
+                var path = Path.Combine(imageDirectory, "one.png");
+                //var largePath = Path.Combine(imageDirectory, "one_big.png");
+                if (File.Exists(path) /*&& File.Exists(largePath)*/)
+                {
+                    defaultPictures.Add(new Picture
+                    {
+                        ArticleId = 1,
+                        Image = File.ReadAllBytes(path),
+                        //ImageLarge = File.ReadAllBytes(largePath)
+                    });
+                }
+                path = Path.Combine(imageDirectory, "two.png");
+                //var largePath = Path.Combine(imageDirectory, "two_big.png");
+                if (File.Exists(path) /*&& File.Exists(largePath)*/)
+                {
+                    defaultPictures.Add(new Picture
+                    {
+                        ArticleId = 2,
+                        Image = File.ReadAllBytes(path),
+                        //ImageLarge = File.ReadAllBytes(largePath)
+                    });
+                }
+
+                path = Path.Combine(imageDirectory, "third.png");
+                //var largePath = Path.Combine(imageDirectory, "third_big.png");
+                if (File.Exists(path) /*&& File.Exists(largePath)*/)
+                {
+                    defaultPictures.Add(new Picture
+                    {
+                        ArticleId = 3,
+                        Image = File.ReadAllBytes(path),
+                        //ImageLarge = File.ReadAllBytes(largePath)
+                    });
+                }
+
+                foreach (Picture picture in defaultPictures)
+                    context.Pictures.Add(picture);
+            }
+
+            #endregion
 
             context.SaveChanges();
         }

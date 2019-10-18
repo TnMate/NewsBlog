@@ -76,7 +76,7 @@ namespace NewsBlog.Website
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            DbInitializer.Initialize(app.ApplicationServices.GetRequiredService<NewsBlogContext>());
+            DbInitializer.Initialize(app.ApplicationServices.GetRequiredService<NewsBlogContext>(), Configuration.GetValue<string>("ImageStore"));
         }
     }
 }
