@@ -71,7 +71,7 @@ namespace NewsBlog.Website.Services
         {
             try
             {
-                _context.Add(article);
+                _context.Articles.Add(article);
                 _context.SaveChanges();
             }
             catch (DbUpdateException)
@@ -86,7 +86,7 @@ namespace NewsBlog.Website.Services
         {
             try
             {
-                _context.Update(article);
+                _context.Articles.Update(article);
                 _context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
@@ -103,13 +103,13 @@ namespace NewsBlog.Website.Services
 
         public bool DeleteArticle(int id)
         {
-            var list = _context.Articles.Find(id);
-            if (list == null)
+            var article = _context.Articles.Find(id);
+            if (article == null)
                 return false;
 
             try
             {
-                _context.Articles.Remove(list);
+                _context.Articles.Remove(article);
                 _context.SaveChanges();
             }
             catch (DbUpdateException)
@@ -129,6 +129,77 @@ namespace NewsBlog.Website.Services
 
         #region Picture
 
+        public Picture GetPicture(int ArticleId)
+        {
+            return _context.Pictures
+                .Where(l => l.ArticleId == ArticleId)
+                .FirstOrDefault();
+        }
+
+        public List<Picture> GetPictures(int ArticleId)
+        {
+            return _context.Pictures
+                .Where(l => l.ArticleId == ArticleId)
+                .ToList();
+        }
+
+        public bool CreatePicture(Picture picture)
+        {
+            try
+            {
+                _context.Pictures.Add(picture);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public NewsBlogUpdateResult UpdatePicture(Picture picture)
+        {
+            try
+            {
+                _context.Pictures.Update(picture);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return NewsBlogUpdateResult.ConcurrencyError;
+            }
+            catch (DbUpdateException)
+            {
+                return NewsBlogUpdateResult.DbError;
+            }
+
+            return NewsBlogUpdateResult.Success;
+        }
+
+        public bool DeletePicture(int id)
+        {
+            var picture = _context.Pictures.Find(id);
+            if (picture == null)
+                return false;
+
+            try
+            {
+                _context.Pictures.Remove(picture);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool PictureExists(int id)
+        {
+            return _context.Pictures.Any(e => e.Id == id);
+        }
         #endregion
     }
 }

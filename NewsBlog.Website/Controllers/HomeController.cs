@@ -15,16 +15,9 @@ namespace NewsBlog.Website.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult Archive()
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "The Archive where we store the old stuff";
 
             return View();
         }
