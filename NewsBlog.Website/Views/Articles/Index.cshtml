@@ -1,0 +1,32 @@
+﻿
+@model HomeViewModel
+
+@{
+    ViewData["Title"] = "Hírek";
+}
+
+<h1>The News</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <h2><a asp-action="Details" asp-route-id="@Model.LeadingArticle.Id">@Model.LeadingArticle.Article.Title</a></h2>
+                <h6>@Model.LeadingArticle.Article.Summary</h6>
+                <p align="right">@Model.LeadingArticle.Article.Date</p>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <td>
+            @foreach (var item in Model.Articles)
+            {
+                <h4><a asp-action="Details" asp-route-id="@item.Id">@item.Title</a></h4>
+                <h6>@item.Summary</h6>
+                <p align="right">@item.Date</p>
+                <hr />
+            }
+        </td>
+    </tbody>
+</table>
+

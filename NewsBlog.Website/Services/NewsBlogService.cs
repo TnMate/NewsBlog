@@ -27,7 +27,9 @@ namespace NewsBlog.Website.Services
 
         public List<Article> GetArticles()
         {
-            return _context.Articles.ToList();
+            return _context.Articles
+                .OrderByDescending(l => l.Date)
+                .ToList();
         }
 
         public Article GetArticleById(int id)
@@ -39,7 +41,7 @@ namespace NewsBlog.Website.Services
         {
             return _context.Articles
                 .Where(l => l.Leading)
-                .OrderBy(l => l.Date)
+                .OrderByDescending(l => l.Date)
                 .FirstOrDefault();
         }
 
@@ -47,7 +49,7 @@ namespace NewsBlog.Website.Services
         {
             return _context.Articles
                 .Where(l => l.Title.Contains(searchString))
-                .OrderBy(l => l.Title)
+                .OrderByDescending(l => l.Date)
                 .ToList();
         }
 
@@ -55,7 +57,7 @@ namespace NewsBlog.Website.Services
         {
             return _context.Articles
                 .Where(l => l.Date == searchDate)
-                .OrderBy(l => l.Date)
+                .OrderByDescending(l => l.Date)
                 .ToList();
         }
 
@@ -63,7 +65,7 @@ namespace NewsBlog.Website.Services
         {
             return _context.Articles
                 .Where(l => l.Content == searchString)
-                .OrderBy(l => l.Date)
+                .OrderByDescending(l => l.Date)
                 .ToList();
         }
 
@@ -129,8 +131,13 @@ namespace NewsBlog.Website.Services
 
         #region Picture
 
-        public Picture GetPicture(int ArticleId)
+        public Picture GetPicture(int? ArticleId)
         {
+            if (ArticleId == null)
+            {
+                return null;
+            }
+
             return _context.Pictures
                 .Where(l => l.ArticleId == ArticleId)
                 .FirstOrDefault();

@@ -15,13 +15,6 @@ namespace NewsBlog.Website.Controllers
             return View();
         }
 
-        public IActionResult Archive()
-        {
-            ViewData["Message"] = "The Archive where we store the old stuff";
-
-            return View();
-        }
-
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

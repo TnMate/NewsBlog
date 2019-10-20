@@ -11,6 +11,8 @@ namespace NewsBlog.Persistence
         [Required]
         public string Title { get; set; }
 
+        public string Author { get; set; }
+
         [DataType(DataType.Date)]
         public DateTime Date { get; set;}
 
