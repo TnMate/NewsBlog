@@ -197,6 +197,18 @@ namespace NewsBlog.Persistence
                     });
                 }
 
+                path = Path.Combine(imageDirectory, "third.png");
+                //var largePath = Path.Combine(imageDirectory, "third_big.png");
+                if (File.Exists(path) /*&& File.Exists(largePath)*/)
+                {
+                    defaultPictures.Add(new Picture
+                    {
+                        ArticleId = 13,
+                        Image = File.ReadAllBytes(path),
+                        //ImageLarge = File.ReadAllBytes(largePath)
+                    });
+                }
+
                 foreach (Picture picture in defaultPictures)
                     context.Pictures.Add(picture);
             }

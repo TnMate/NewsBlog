@@ -137,22 +137,27 @@ namespace NewsBlog.Website.Services
 
         #region Picture
 
-        public Picture GetPicture(int? ArticleId)
+        public Picture GetPicture(int? articleId)
         {
-            if (ArticleId == null)
+            if (articleId == null)
             {
                 return null;
             }
 
             return _context.Pictures
-                .Where(l => l.ArticleId == ArticleId)
+                .Where(l => l.ArticleId == articleId)
                 .FirstOrDefault();
         }
 
-        public List<Picture> GetPictures(int ArticleId)
+        public List<Picture> GetPictures(int? articleId)
         {
+            if (articleId == null)
+            {
+                return null;
+            }
+
             return _context.Pictures
-                .Where(l => l.ArticleId == ArticleId)
+                .Where(l => l.ArticleId == articleId)
                 .ToList();
         }
 

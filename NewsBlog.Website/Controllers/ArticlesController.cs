@@ -53,7 +53,15 @@ namespace NewsBlog.Website.Controllers
             return View();
         }
 
-        
+        public FileResult PictureForArticle(Int32? pictureId)
+        {
+            Byte[] picture = _newsBlogService.GetPicture(pictureId).Image;
+
+            if (picture == null) 
+                return File("~/images/NoImage.png", "image/png");
+
+            return File(picture, "image/png");
+        }
 
         public IActionResult Error()
         {
