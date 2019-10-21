@@ -25,10 +25,16 @@ namespace NewsBlog.Website.Services
 
         #region Article
 
-        public List<Article> GetArticles()
+        public List<Article> GetArticles(int? page = null)
         {
+            var test = page ?? 1;
+
+            int size = 10;
+
             return _context.Articles
                 .OrderByDescending(l => l.Date)
+                .Skip(size * (test - 1))
+                .Take(size)
                 .ToList();
         }
 

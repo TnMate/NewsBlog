@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NewsBlog.Website.Models;
 using NewsBlog.Website.Services;
+using NewsBlog.Persistence;
+
 namespace NewsBlog.Website.Controllers
 {
     public class ArticlesController : Controller
@@ -21,8 +23,9 @@ namespace NewsBlog.Website.Controllers
         {
             var HomeView = new HomeViewModel();
             HomeView.Articles = _newsBlogService.GetArticles();
-            HomeView.LeadingArticle.Article = _newsBlogService.GetLeadingArticle();
-            HomeView.LeadingArticle.Picture = _newsBlogService.GetPicture(HomeView.LeadingArticle.Article.Id);
+            HomeView.LeadingArticleView = new ArticleViewModel();
+            HomeView.LeadingArticleView.Article = _newsBlogService.GetLeadingArticle();
+            HomeView.LeadingArticleView.Picture = _newsBlogService.GetPicture(_newsBlogService.GetLeadingArticle().Id);
 
             return View(HomeView);
         }
@@ -43,23 +46,14 @@ namespace NewsBlog.Website.Controllers
             return View(list);
         }
 
-        public IActionResult Archive()
+        public IActionResult Archive(int? page)
         {
             ViewData["Message"] = "The Archive where we store the old stuff";
 
             return View();
         }
 
-        public FileResult Image(int? id)
-        {
-            // lekérjük a megadott azonosítóval rendelkező képet
-            Byte[] imageContent = _newsBlogService.GetPicture(id);
-
-            if (imageContent == null) // amennyiben nem sikerült betölteni, egy alapértelmezett képet adunk vissza
-                return File("~/images/NoImage.png", "image/png");
-
-            return File(imageContent, "image/png");
-        }
+        
 
         public IActionResult Error()
         {

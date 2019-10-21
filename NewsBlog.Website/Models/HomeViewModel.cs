@@ -9,6 +9,6 @@ namespace NewsBlog.Website.Models
     public class HomeViewModel
     {
         public IEnumerable<Article> Articles;
-        public ArticleViewModel LeadingArticle;
+        public ArticleViewModel LeadingArticleView;
     }
 }
