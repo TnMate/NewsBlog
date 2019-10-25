@@ -1,11 +1,18 @@
-﻿@model Article
+﻿@model ArticleViewModel
 
 @{
     ViewData["Title"] = "Article";
 }
+@if (Model.PicExist)
+{
+    <a asp-action="Gallery" asp-route-id="@Model.Article.Id">
+        <img src="@Url.Action("PictureForArticle", new {pictureId = Model.Article.Id})" class="contentPicture" height="100" width="200" />
+    </a>
+}
 
-<h2>@Model.Title</h2>
-<h4>@Model.Summary</h4>
-<h5><b>By </b>@Model.Author</h5>
-<p>@Model.Content</p>
+<h2>@Model.Article.Title</h2>
+<h4>@Model.Article.Summary</h4>
+<h5><b>By </b>@Model.Article.Author</h5>
+<p>@Model.Article.Content</p>
+<p align="right">@Model.Article.Date</p>
 

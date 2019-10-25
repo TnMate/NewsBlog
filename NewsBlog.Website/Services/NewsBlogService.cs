@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using NewsBlog.Persistence;
+using System.ComponentModel.DataAnnotations;
 
 namespace NewsBlog.Website.Services
 {
@@ -25,17 +26,73 @@ namespace NewsBlog.Website.Services
 
         #region Article
 
-        public List<Article> GetArticles(int? page = null)
+        public List<Article> GetArticles(int size = 10, int? page = null)
         {
-            var test = page ?? 1;
+            int test;
 
-            int size = 10;
+            if ( page < 1)
+            {
+                test = 1;
+            }
+            else
+            {
+                test = page ?? 1;
+            }
+
+            if (size < 0)
+            {
+                size = 0;
+            }
 
             return _context.Articles
                 .OrderByDescending(l => l.Date)
                 .Skip(size * (test - 1))
                 .Take(size)
                 .ToList();
+        }
+
+        public List<Article> GetArticlesBySearch(int size = 10, int? page = null, string textString = null, string titleString = null, string dateString = null)
+        {
+            int test;
+
+            textString = textString ?? "";
+            titleString = titleString ?? "";
+            dateString = dateString ?? "";
+
+            if (page < 1)
+            {
+                test = 1;
+            }
+            else
+            {
+                test = page ?? 1;
+            }
+
+            if (size < 0)
+            {
+                size = 0;
+            }
+
+            if (dateString == "")
+            {
+                return _context.Articles
+                    .Where(l => l.Content.Contains(textString) && l.Title.Contains(titleString))
+                    .OrderByDescending(l => l.Date)
+                    .Skip(size * (test - 1))
+                    .Take(size)
+                    .ToList();
+            }
+            else
+            {
+                DateTime date = DateTime.Parse(dateString);
+                return _context.Articles
+                    .Where(l => l.Content.Contains(textString) && l.Title.Contains(titleString)
+                        && l.Date.Year == date.Year && l.Date.Month == date.Month && l.Date.Day == date.Day)
+                    .OrderByDescending(l => l.Date)
+                    .Skip(size * (test - 1))
+                    .Take(size)
+                    .ToList();
+            }
         }
 
         public Article GetArticleById(int id)
@@ -137,8 +194,20 @@ namespace NewsBlog.Website.Services
 
         #region Picture
 
-        public Picture GetPicture(int? articleId)
+        public bool DoesItHavePictures(int? articleId)
         {
+            if (articleId == null)
+            {
+                return false;
+            }
+
+            return _context.Pictures
+                .Any(l => l.ArticleId == articleId);
+        }
+
+        public Picture GetPicture(int? articleId, int number = 0)
+        {
+
             if (articleId == null)
             {
                 return null;
@@ -146,6 +215,7 @@ namespace NewsBlog.Website.Services
 
             return _context.Pictures
                 .Where(l => l.ArticleId == articleId)
+                .Skip(number)
                 .FirstOrDefault();
         }
 

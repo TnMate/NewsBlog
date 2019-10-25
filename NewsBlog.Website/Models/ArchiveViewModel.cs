@@ -6,10 +6,9 @@ using NewsBlog.Persistence;
 
 namespace NewsBlog.Website.Models
 {
-    public class ArticleViewModel
+    public class ArchiveViewModel
     {
-        public Article Article;
-        public Picture Picture;
-        public Boolean PicExist;
+        public IEnumerable<Article> Articles;
+        public int Page;
     }
 }

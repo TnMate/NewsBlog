@@ -1,0 +1,23 @@
+﻿
+@model Article
+
+@{
+    ViewData["Title"] = "Gallery";
+}
+
+<h2>Gallery</h2>
+<img src="@Url.Action("PictureForArticle", new {pictureId = Model.Id, number = ViewBag.Number})" class="contentPicture" />
+
+<p>
+    @if (ViewBag.Number < 0)
+    {
+        <a asp-action="Gallery" asp-route-number="@(ViewBag.Number - 1)">Previous</a>
+    }
+    @if (ViewBag.Number == ViewBag.Max)
+    {
+        <a asp-action="Gallery" asp-route-number="@(ViewBag.Number+1)">Next</a>
+    }
+</p>
+
+
+

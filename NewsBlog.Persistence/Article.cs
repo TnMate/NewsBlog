@@ -13,6 +13,7 @@ namespace NewsBlog.Persistence
 
         public string Author { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         [DataType(DataType.Date)]
         public DateTime Date { get; set;}
 
