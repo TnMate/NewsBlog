@@ -25,12 +25,21 @@ namespace NewsBlog.Persistence
             {
                 new Article
                 {
-                    Title = "Magyarok nyernek",
-                    Author = "Someone1",
-                    Date = DateTime.Now.AddDays(-1),
-                    Summary = "Nyertek egy sporton belül",
-                    Content = "A vívásban nyertek",
-                    Leading = false
+                    Title = "Title1.1",
+                    Author = "Someone2",
+                    Date = DateTime.Now.AddDays(-5),
+                    Summary = "Summary1",
+                    Content = "Content1",
+                    Leading = true
+                },
+                new Article
+                {
+                    Title = "Title1",
+                    Author = "Someone2",
+                    Date = DateTime.Now.AddDays(-5),
+                    Summary = "Summary1",
+                    Content = "Content1",
+                    Leading = true
                 },
                 new Article
                 {
@@ -40,6 +49,24 @@ namespace NewsBlog.Persistence
                     Summary = "A harmadik világtáncversenyen elsők lettek",
                     Content = "Megnyerték a versenyt, s bosszút álltak a második s az első világtáncversenyen elért csúfos vereségükért",
                     Leading = true
+                },
+                new Article
+                {
+                    Title = "Csontok",
+                    Author = "Rex",
+                    Date = DateTime.Now.AddDays(-6),
+                    Summary = "Hol ásták el a csontokat",
+                    Content = "Azt hallottam hogy a korábbi kisállatok valamiféle csontokat ástak el valahova a kertben. Meg kell találnom őket... hol lehetnek... hmm fel kéne ásnom az egész kertet hogy megleljem őket.",
+                    Leading = true
+                },
+                new Article
+                {
+                    Title = "Magyarok nyernek",
+                    Author = "Someone1",
+                    Date = DateTime.Now.AddDays(-1),
+                    Summary = "Nyertek egy sporton belül",
+                    Content = "A vívásban nyertek",
+                    Leading = false
                 },
                 new Article
                 {
@@ -58,15 +85,6 @@ namespace NewsBlog.Persistence
                     Summary = "Valaki megtalálta egy gyerek elveszett 50m forintját",
                     Content = "S az az ember kedvesen visszaadta a tulajdonosának, minden egyes fillérig, szegény felesége...",
                     Leading = false
-                },
-                new Article
-                {
-                    Title = "Title1",
-                    Author = "Someone2",
-                    Date = DateTime.Now.AddDays(-5),
-                    Summary = "Summary1",
-                    Content = "Content1",
-                    Leading = true
                 },
                 new Article
                 {
@@ -106,15 +124,6 @@ namespace NewsBlog.Persistence
                 },
                 new Article
                 {
-                    Title = "Title1.1",
-                    Author = "Someone2",
-                    Date = DateTime.Now.AddDays(-5),
-                    Summary = "Summary1",
-                    Content = "Content1",
-                    Leading = true
-                },
-                new Article
-                {
                     Title = "Title2.2",
                     Author = "Someone2",
                     Date = DateTime.Now.AddDays(-6),
@@ -138,6 +147,87 @@ namespace NewsBlog.Persistence
                     Date = DateTime.Now.AddDays(-8),
                     Summary = "Summary4",
                     Content = "Content4",
+                    Leading = false
+                },
+                new Article
+                {
+                    Title = "Valami amerika",
+                    Author = "Egy ember",
+                    Date = DateTime.Now.AddDays(-4),
+                    Summary = "Valamiféle filmről szoló dolog akar ez lenni",
+                    Content = "Itten volt hol nem volt volt egyszer egy kisgyerek aki szeretett volna a beadandóhoz valami szöveget kitalálni. The end",
+                    Leading = false
+                },
+                new Article
+                {
+                    Title = "Sok csoki",
+                    Author = "Másik ember",
+                    Date = DateTime.Now.AddDays(-3),
+                    Summary = "Milyen jó a fehér csoki",
+                    Content = "A fehér csoki csokitartalma sok, s fehér. Kell ennél több. A helyszíni tudosítónk szerint nem.",
+                    Leading = false
+                },
+                new Article
+                {
+                    Title = "Minden jó ha a vége jó",
+                    Author = "Rex",
+                    Date = DateTime.Now.AddDays(-6),
+                    Summary = "Ez egy romantikus filmről szól",
+                    Content = "A végére tök barátságos lesz az egyik a másikkal aztán összeházasodnak. Happy end. Everyone is happy",
+                    Leading = false
+                },
+                new Article
+                {
+                    Title = "Öregedés ellenszere",
+                    Author = "Doktor House",
+                    Date = DateTime.Now.AddDays(-2),
+                    Summary = "Öregedés ellenszere a drogok",
+                    Content = "Legyen baleset amivel tönkremegy a lába. Kell majd szednie jó kis drogokat aztán minden rendben lesz. Legyen utána egy sorozata a saját életéreől ahogy majdnem megöl embereket aztán valami oknál fogva pedig meggyógyítja őket.",
+                    Leading = false
+                },
+                new Article
+                {
+                    Title = "Egyszer volt hol nem volt",
+                    Author = "Disney",
+                    Date = DateTime.Now.AddDays(-3),
+                    Summary = "Hét törpe és egy gonosz kisfiú",
+                    Content = "A hét törpét kirabolta a kisfiú akik utána bosszút esküdtek. Elmentek a szomszéd várba a kunyhójuk mellett ahol egy boszorkány lakott. Megkérték átkozza meg a kisfiút. A boszi teljesítette a kérést és nyúllá változott aki aztán a lopott dolgokkal így nem tudott mit kezdeni.",
+                    Leading = false
+                },
+                new Article
+                {
+                    Title = "Mikrofonok",
+                    Author = "Mikrofon Fon",
+                    Date = DateTime.Now.AddDays(-1),
+                    Summary = "Melyik mikrofont válassza karrierjéhez",
+                    Content = "Alapjáraton mindegyik mikrofon jól teljesít, ha felveszi a hangját az emberek akkor már bátran javaslom. Azon belül minél nagyobb annál jobb, hiszen tudják hogy van a mondás... minél nagyobb annál jobb",
+                    Leading = false
+                },
+                new Article
+                {
+                    Title = "Title valami",
+                    Author = "Hollyweed embere",
+                    Date = DateTime.Now.AddDays(-4),
+                    Summary = "Valami filmről bisztos szól",
+                    Content = "S ebben a filmben sok sok minden történik amit az ember már követni se tud hogy őszinte legyen. Robbanás, szerelem, háború, godzilla, űrlények, ősrobbanás, fekete lyuk, minden... egyszerűen minden",
+                    Leading = false
+                },
+                new Article
+                {
+                    Title = "Out of ideas?",
+                    Author = "Máté",
+                    Date = DateTime.Now,
+                    Summary = "Ötletem sincs mit írja ide",
+                    Content = "Ez a beadandó táblafeltöltés lényege, ideírod az összes ötletet ami eszedbe jut, lehet a végén még befejezed időben ezt a beadandót... muhahahahahahahahahahahahaa...... the end",
+                    Leading = false
+                },
+                new Article
+                {
+                    Title = "Ennyi már csak elég lesz",
+                    Author = "Rex",
+                    Date = DateTime.Now.AddDays(-1),
+                    Summary = "Ez az utolsó, ugye?",
+                    Content = "Remélem ez lesz az utolsó táblabejegyzés amit írnom kell, mert már tényleg nincs ötletem, csak az hogy panaszkodni :'D",
                     Leading = false
                 },
                 new Article
@@ -168,7 +258,7 @@ namespace NewsBlog.Persistence
                 {
                     defaultPictures.Add(new Picture
                     {
-                        ArticleId = 1,
+                        ArticleId = defaultArticles[0].Id,
                         Image = File.ReadAllBytes(path),
                         //ImageLarge = File.ReadAllBytes(largePath)
                     });
@@ -179,7 +269,7 @@ namespace NewsBlog.Persistence
                 {
                     defaultPictures.Add(new Picture
                     {
-                        ArticleId = 2,
+                        ArticleId = defaultArticles[1].Id,
                         Image = File.ReadAllBytes(path),
                         //ImageLarge = File.ReadAllBytes(largePath)
                     });
@@ -191,19 +281,31 @@ namespace NewsBlog.Persistence
                 {
                     defaultPictures.Add(new Picture
                     {
-                        ArticleId = 3,
+                        ArticleId = defaultArticles[2].Id,
                         Image = File.ReadAllBytes(path),
                         //ImageLarge = File.ReadAllBytes(largePath)
                     });
                 }
 
-                path = Path.Combine(imageDirectory, "third.png");
+                path = Path.Combine(imageDirectory, "four.png");
                 //var largePath = Path.Combine(imageDirectory, "third_big.png");
                 if (File.Exists(path) /*&& File.Exists(largePath)*/)
                 {
                     defaultPictures.Add(new Picture
                     {
-                        ArticleId = 13,
+                        ArticleId = defaultArticles[3].Id,
+                        Image = File.ReadAllBytes(path),
+                        //ImageLarge = File.ReadAllBytes(largePath)
+                    });
+                    defaultPictures.Add(new Picture
+                    {
+                        ArticleId = defaultArticles[2].Id,
+                        Image = File.ReadAllBytes(path),
+                        //ImageLarge = File.ReadAllBytes(largePath)
+                    });
+                    defaultPictures.Add(new Picture
+                    {
+                        ArticleId = defaultArticles[1].Id,
                         Image = File.ReadAllBytes(path),
                         //ImageLarge = File.ReadAllBytes(largePath)
                     });

@@ -73,7 +73,7 @@ namespace NewsBlog.Website
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Articles}/{action=Index}/{id?}");
             });
 
             DbInitializer.Initialize(app.ApplicationServices.GetRequiredService<NewsBlogContext>(), Configuration.GetValue<string>("ImageStore"));

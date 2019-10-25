@@ -71,8 +71,15 @@ namespace NewsBlog.Website.Controllers
                 number = 0;
             }
 
+
+            ViewBag.Max = _newsBlogService.GetPictures((int)id).Count()-1;
+
+            if (number > ViewBag.Max)
+            {
+                number = ViewBag.Max;
+            }
+
             ViewBag.Number = number;
-            ViewBag.Max = _newsBlogService.GetPictures((int)id).Count();
 
             return View(_newsBlogService.GetArticleById((int)id));
         }

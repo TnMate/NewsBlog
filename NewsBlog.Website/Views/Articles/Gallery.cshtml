@@ -9,11 +9,11 @@
 <img src="@Url.Action("PictureForArticle", new {pictureId = Model.Id, number = ViewBag.Number})" class="contentPicture" />
 
 <p>
-    @if (ViewBag.Number < 0)
+    @if (ViewBag.Number > 0 && ViewBag.Number <= ViewBag.Max)
     {
         <a asp-action="Gallery" asp-route-number="@(ViewBag.Number - 1)">Previous</a>
     }
-    @if (ViewBag.Number == ViewBag.Max)
+    @if (ViewBag.Number < ViewBag.Max)
     {
         <a asp-action="Gallery" asp-route-number="@(ViewBag.Number+1)">Next</a>
     }
