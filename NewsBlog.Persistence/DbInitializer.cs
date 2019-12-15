@@ -2,13 +2,16 @@
 using System.Linq;
 using System.IO;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 
 namespace NewsBlog.Persistence
 {
     public static class DbInitializer
     {
-        public static void Initialize(NewsBlogContext context, string imageDirectory = null)
+
+        public static void Initialize(NewsBlogContext context, UserManager<User> userManager, string imageDirectory = null)
         {
+
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
@@ -18,6 +21,24 @@ namespace NewsBlog.Persistence
             }
 
             // adatfeltöltés
+
+            #region Users
+
+            IList<User> defaultUsers = new List<User>
+            {
+
+            };
+            var user1 = new User
+            {
+                Name = "someone",
+                UserName = "test"
+            };
+            var userPassword1 = "123";
+            var result1 = userManager.CreateAsync(user1, userPassword1);
+
+            context.Users.Add(result1);
+
+            #endregion
 
             #region Articles
 
