@@ -108,30 +108,6 @@ namespace NewsBlog.Website.Services
                 .FirstOrDefault();
         }
 
-        public List<Article> GetArticlesByTitle(string searchString)
-        {
-            return _context.Articles
-                .Where(l => l.Title.Contains(searchString))
-                .OrderByDescending(l => l.Date)
-                .ToList();
-        }
-
-        public List<Article> GetArticlesByDate(DateTime searchDate)
-        {
-            return _context.Articles
-                .Where(l => l.Date == searchDate)
-                .OrderByDescending(l => l.Date)
-                .ToList();
-        }
-
-        public List<Article> GetArticlesByContent(string searchString)
-        {
-            return _context.Articles
-                .Where(l => l.Content == searchString)
-                .OrderByDescending(l => l.Date)
-                .ToList();
-        }
-
         public bool CreateArticle(Article article)
         {
             try
