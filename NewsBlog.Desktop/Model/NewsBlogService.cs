@@ -36,9 +36,12 @@ namespace NewsBlog.Desktop.Model
                 var test2 = JsonConvert.DeserializeObject<dynamic>(test);
 
                 var test3 = new List<Article>{ };
+                var article = new Article { };
                 foreach (var item in test2)
                 {
-                    var article = new Article
+                    var test4 = item.ToList();
+
+                    article = new Article
                     {
                         Id = item.Value<int>("Id"),
                         Title = item.Value<string>("Title"),
