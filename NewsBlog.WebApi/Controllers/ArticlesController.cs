@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NewsBlog.Persistence;
+using Microsoft.AspNet.Identity;
 
 namespace NewsBlog.WebApi.Controllers
 {
@@ -22,12 +24,20 @@ namespace NewsBlog.WebApi.Controllers
             _context = context;
         }
 
-        // GET: api/Items/?articleId=5
+        // GET: api/Articles/
         [HttpGet]
-        public IEnumerable<Article> GetItems([FromQuery] int articleId)
+        public IEnumerable<Article> GetArticles()
         {
-            return _context.Articles.Where(i => i.Id == articleId);
+            var userId = User.Identity.GetUserId();
+            return _context.Articles.Where(i => i.UserId == userId);
         }
+        /*
+        // GET: api/Articles/?articleId=5
+        [HttpGet]
+        public Article GetArticle([FromQuery] int articleId)
+        {
+            return _context.Articles.Where(i => i.Id == articleId).FirstOrDefault();
+        }*/
 
 
     }

@@ -32,7 +32,7 @@ namespace NewsBlog.Website
             services.AddDbContext<NewsBlogContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<User, IdentityRole>(options =>
+            services.AddIdentity<User, IdentityRole<int>>(options =>
             {
                 options.Password.RequireDigit = false;
                 options.Password.RequiredLength = 3;
@@ -76,7 +76,10 @@ namespace NewsBlog.Website
                     template: "{controller=Articles}/{action=Index}/{id?}");
             });
 
-            DbInitializer.Initialize(app.ApplicationServices.GetRequiredService<NewsBlogContext>(), Configuration.GetValue<string>("ImageStore"));
+            DbInitializer.Initialize(app.ApplicationServices.GetRequiredService<NewsBlogContext>(),
+                app.ApplicationServices.GetRequiredService<UserManager<User>>(),
+                app.ApplicationServices.GetRequiredService<RoleManager<IdentityRole > >(),
+                Configuration.GetValue<string>("ImageStore"));
         }
     }
 }

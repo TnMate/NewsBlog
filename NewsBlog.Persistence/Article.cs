@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace NewsBlog.Persistence
@@ -12,6 +13,12 @@ namespace NewsBlog.Persistence
         public string Title { get; set; }
 
         public string Author { get; set; }
+
+        [Required]
+        [DisplayName("Author")]
+        public string UserId { get; set; }
+
+        public User User { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         [DataType(DataType.Date)]

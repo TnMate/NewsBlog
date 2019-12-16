@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.IO;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 
@@ -9,7 +10,7 @@ namespace NewsBlog.Persistence
     public static class DbInitializer
     {
 
-        public static void Initialize(NewsBlogContext context, UserManager<User> userManager, string imageDirectory = null)
+        public static void Initialize(NewsBlogContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager, string imageDirectory = null)
         {
 
             context.Database.EnsureDeleted();
@@ -24,19 +25,40 @@ namespace NewsBlog.Persistence
 
             #region Users
 
-            IList<User> defaultUsers = new List<User>
+            var user1 = new User()
             {
-
+                UserName = "asd1",
+                Name = "Ember1"
             };
-            var user1 = new User
+            var user2 = new User()
             {
-                Name = "someone",
-                UserName = "test"
+                UserName = "asd2",
+                Name = "Ember2"
             };
-            var userPassword1 = "123";
-            var result1 = userManager.CreateAsync(user1, userPassword1);
+            var user3 = new User()
+            {
+                UserName = "asd3",
+                Name = "Ember3"
+            };
+            var user4 = new User()
+            {
+                UserName = "asd4",
+                Name = "Ember4"
+            };
+            Task.Run(async () =>
+            {
+                await roleManager.CreateAsync(new IdentityRole("admin"));
 
-            context.Users.Add(result1);
+                await userManager.CreateAsync(user1, "123");
+                await userManager.CreateAsync(user2, "123");
+                await userManager.CreateAsync(user3, "123");
+                await userManager.CreateAsync(user4, "123");
+
+                await userManager.AddToRoleAsync(user1, "admin");
+                await userManager.AddToRoleAsync(user2, "admin");
+                await userManager.AddToRoleAsync(user3, "admin");
+                await userManager.AddToRoleAsync(user4, "admin");
+            }).GetAwaiter().GetResult();
 
             #endregion
 
@@ -47,7 +69,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Title1.1",
-                    Author = "Someone2",
+                    Author = user2.Name,
+                    UserId = user2.Id,
                     Date = DateTime.Now.AddDays(-5),
                     Summary = "Summary1",
                     Content = "Content1",
@@ -56,7 +79,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Title1",
-                    Author = "Someone2",
+                    Author = user2.Name,
+                    UserId = user2.Id,
                     Date = DateTime.Now.AddDays(-5),
                     Summary = "Summary1",
                     Content = "Content1",
@@ -65,7 +89,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Németek nyernek",
-                    Author = "Someone2",
+                    Author = user2.Name,
+                    UserId = user2.Id,
                     Date = DateTime.Now.AddDays(-2),
                     Summary = "A harmadik világtáncversenyen elsők lettek",
                     Content = "Megnyerték a versenyt, s bosszút álltak a második s az első világtáncversenyen elért csúfos vereségükért",
@@ -74,7 +99,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Csontok",
-                    Author = "Rex",
+                    Author = user1.Name,
+                    UserId = user1.Id,
                     Date = DateTime.Now.AddDays(-6),
                     Summary = "Hol ásták el a csontokat",
                     Content = "Azt hallottam hogy a korábbi kisállatok valamiféle csontokat ástak el valahova a kertben. Meg kell találnom őket... hol lehetnek... hmm fel kéne ásnom az egész kertet hogy megleljem őket.",
@@ -83,7 +109,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Magyarok nyernek",
-                    Author = "Someone1",
+                    Author = user1.Name,
+                    UserId = user1.Id,
                     Date = DateTime.Now.AddDays(-1),
                     Summary = "Nyertek egy sporton belül",
                     Content = "A vívásban nyertek",
@@ -92,7 +119,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Szerencse",
-                    Author = "Someone1",
+                    Author = user1.Name,
+                    UserId = user1.Id,
                     Date = DateTime.Now.AddDays(-3),
                     Summary = "Valaki visszaadta egy gyerek elveszett 50m forintját",
                     Content = "S az az ember kedvesen visszaadta a tulajdonosának, minden egyes fillérig, szerencsés fickó.",
@@ -101,7 +129,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Balszerencse",
-                    Author = "Someone1",
+                    Author = user1.Name,
+                    UserId = user1.Id,
                     Date = DateTime.Now.AddDays(-4),
                     Summary = "Valaki megtalálta egy gyerek elveszett 50m forintját",
                     Content = "S az az ember kedvesen visszaadta a tulajdonosának, minden egyes fillérig, szegény felesége...",
@@ -110,7 +139,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Title2",
-                    Author = "Someone3",
+                    Author = user3.Name,
+                    UserId = user3.Id,
                     Date = DateTime.Now.AddDays(-6),
                     Summary = "Summary2",
                     Content = "Content2",
@@ -119,7 +149,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Title3",
-                    Author = "Someone1",
+                    Author = user1.Name,
+                    UserId = user1.Id,
                     Date = DateTime.Now.AddDays(-7),
                     Summary = "Summary3",
                     Content = "Content3",
@@ -128,7 +159,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Title4",
-                    Author = "Someone3",
+                    Author = user3.Name,
+                    UserId = user3.Id,
                     Date = DateTime.Now.AddDays(-8),
                     Summary = "Summary4",
                     Content = "Content4",
@@ -137,7 +169,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Title5",
-                    Author = "Someone1",
+                    Author = user1.Name,
+                    UserId = user1.Id,
                     Date = DateTime.Now.AddDays(-9),
                     Summary = "Summary5",
                     Content = "Content5",
@@ -146,7 +179,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Title2.2",
-                    Author = "Someone2",
+                    Author = user2.Name,
+                    UserId = user2.Id,
                     Date = DateTime.Now.AddDays(-6),
                     Summary = "Summary2",
                     Content = "Content2",
@@ -155,7 +189,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Title3.3",
-                    Author = "Someone2",
+                    Author = user2.Name,
+                    UserId = user2.Id,
                     Date = DateTime.Now.AddDays(-7),
                     Summary = "Summary3",
                     Content = "Content3",
@@ -164,7 +199,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Title4.4",
-                    Author = "Someone4",
+                    Author = user4.Name,
+                    UserId = user4.Id,
                     Date = DateTime.Now.AddDays(-8),
                     Summary = "Summary4",
                     Content = "Content4",
@@ -173,7 +209,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Valami amerika",
-                    Author = "Egy ember",
+                    Author = user4.Name,
+                    UserId = user4.Id,
                     Date = DateTime.Now.AddDays(-4),
                     Summary = "Valamiféle filmről szoló dolog akar ez lenni",
                     Content = "Itten volt hol nem volt volt egyszer egy kisgyerek aki szeretett volna a beadandóhoz valami szöveget kitalálni. The end",
@@ -182,7 +219,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Sok csoki",
-                    Author = "Másik ember",
+                    Author = user3.Name,
+                    UserId = user3.Id,
                     Date = DateTime.Now.AddDays(-3),
                     Summary = "Milyen jó a fehér csoki",
                     Content = "A fehér csoki csokitartalma sok, s fehér. Kell ennél több. A helyszíni tudosítónk szerint nem.",
@@ -191,7 +229,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Minden jó ha a vége jó",
-                    Author = "Rex",
+                    Author = user2.Name,
+                    UserId = user2.Id,
                     Date = DateTime.Now.AddDays(-6),
                     Summary = "Ez egy romantikus filmről szól",
                     Content = "A végére tök barátságos lesz az egyik a másikkal aztán összeházasodnak. Happy end. Everyone is happy",
@@ -200,7 +239,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Öregedés ellenszere",
-                    Author = "Doktor House",
+                    Author = user3.Name,
+                    UserId = user3.Id,
                     Date = DateTime.Now.AddDays(-2),
                     Summary = "Öregedés ellenszere a drogok",
                     Content = "Legyen baleset amivel tönkremegy a lába. Kell majd szednie jó kis drogokat aztán minden rendben lesz. Legyen utána egy sorozata a saját életéreől ahogy majdnem megöl embereket aztán valami oknál fogva pedig meggyógyítja őket.",
@@ -209,7 +249,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Egyszer volt hol nem volt",
-                    Author = "Disney",
+                    Author = user1.Name,
+                    UserId = user1.Id,
                     Date = DateTime.Now.AddDays(-3),
                     Summary = "Hét törpe és egy gonosz kisfiú",
                     Content = "A hét törpét kirabolta a kisfiú akik utána bosszút esküdtek. Elmentek a szomszéd várba a kunyhójuk mellett ahol egy boszorkány lakott. Megkérték átkozza meg a kisfiút. A boszi teljesítette a kérést és nyúllá változott aki aztán a lopott dolgokkal így nem tudott mit kezdeni.",
@@ -218,7 +259,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Mikrofonok",
-                    Author = "Mikrofon Fon",
+                    Author = user4.Name,
+                    UserId = user4.Id,
                     Date = DateTime.Now.AddDays(-1),
                     Summary = "Melyik mikrofont válassza karrierjéhez",
                     Content = "Alapjáraton mindegyik mikrofon jól teljesít, ha felveszi a hangját az emberek akkor már bátran javaslom. Azon belül minél nagyobb annál jobb, hiszen tudják hogy van a mondás... minél nagyobb annál jobb",
@@ -227,7 +269,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Title valami",
-                    Author = "Hollyweed embere",
+                    Author = user3.Name,
+                    UserId = user3.Id,
                     Date = DateTime.Now.AddDays(-4),
                     Summary = "Valami filmről bisztos szól",
                     Content = "S ebben a filmben sok sok minden történik amit az ember már követni se tud hogy őszinte legyen. Robbanás, szerelem, háború, godzilla, űrlények, ősrobbanás, fekete lyuk, minden... egyszerűen minden",
@@ -236,7 +279,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Out of ideas?",
-                    Author = "Máté",
+                    Author = user1.Name,
+                    UserId = user1.Id,
                     Date = DateTime.Now,
                     Summary = "Ötletem sincs mit írja ide",
                     Content = "Ez a beadandó táblafeltöltés lényege, ideírod az összes ötletet ami eszedbe jut, lehet a végén még befejezed időben ezt a beadandót... muhahahahahahahahahahahahaa...... the end",
@@ -245,7 +289,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Ennyi már csak elég lesz",
-                    Author = "Rex",
+                    Author = user2.Name,
+                    UserId = user2.Id,
                     Date = DateTime.Now.AddDays(-1),
                     Summary = "Ez az utolsó, ugye?",
                     Content = "Remélem ez lesz az utolsó táblabejegyzés amit írnom kell, mert már tényleg nincs ötletem, csak az hogy panaszkodni :'D",
@@ -254,7 +299,8 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Title5.5",
-                    Author = "Someone2",
+                    Author = user2.Name,
+                    UserId = user2.Id,
                     Date = DateTime.Now.AddDays(-9),
                     Summary = "Summary5",
                     Content = "Content5",

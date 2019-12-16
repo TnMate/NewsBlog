@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace NewsBlog.Persistence
 {
-    public class User : IdentityUser<int>
+    public class User : IdentityUser
     {
         public string Name { get; set; }
     }
