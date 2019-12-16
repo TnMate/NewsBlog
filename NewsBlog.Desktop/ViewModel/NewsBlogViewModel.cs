@@ -9,7 +9,7 @@ namespace NewsBlog.Desktop.ViewModel
     public class NewsBlogViewModel : ViewModelBase
     {
         private ObservableCollection<Article> _articles;
-        //private Article _article;
+        private Article _article;
         private readonly INewsBlogService _service;
 
         public ObservableCollection<Article> Articles
@@ -22,7 +22,7 @@ namespace NewsBlog.Desktop.ViewModel
             }
         }
 
-        /*public Article Article
+        public Article Article
         {
             get => _article;
             set
@@ -30,7 +30,7 @@ namespace NewsBlog.Desktop.ViewModel
                 _article = value;
                 OnPropertyChanged();
             }
-        }*/
+        }
 
         public NewsBlogViewModel(INewsBlogService service)
         {

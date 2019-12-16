@@ -40,15 +40,16 @@ namespace NewsBlog.Desktop.Model
                 {
                     var article = new Article
                     {
-                        Id = item.Value<int>("id"),
-                        Title = item.Value<string>("title"),
-                        Author = item.Value<string>("author"),
-                        UserId = item.Value<string>("userid"),
-                        Date = item.Value<DateTime>("date"),
-                        Summary = item.Value<string>("summary"),
-                        Content = item.Value<string>("content"),
-                        Leading = item.Value<Boolean>("leading")
+                        Id = item.Value<int>("Id"),
+                        Title = item.Value<string>("Title"),
+                        Author = item.Value<string>("Author"),
+                        UserId = item.Value<string>("Userid"),
+                        Date = item.Value<DateTime>("Date"),
+                        Summary = item.Value<string>("Summary"),
+                        Content = item.Value<string>("Content"),
+                        Leading = item.Value<Boolean>("Leading")
                     };
+                    article.Id = item.Value<int>("id");
                     test3.Add(article);
                 }
                 return test3;
