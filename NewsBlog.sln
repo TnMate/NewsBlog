@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsBlog.Persistence", "New
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsBlog.Website", "NewsBlog.Website\NewsBlog.Website.csproj", "{8EF9FD7C-28E7-4C32-9529-435EA0AA3371}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{69918CF0-2ACB-4178-9603-BA71B6A6AA87}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8EF9FD7C-28E7-4C32-9529-435EA0AA3371}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EF9FD7C-28E7-4C32-9529-435EA0AA3371}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EF9FD7C-28E7-4C32-9529-435EA0AA3371}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69918CF0-2ACB-4178-9603-BA71B6A6AA87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69918CF0-2ACB-4178-9603-BA71B6A6AA87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69918CF0-2ACB-4178-9603-BA71B6A6AA87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69918CF0-2ACB-4178-9603-BA71B6A6AA87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
