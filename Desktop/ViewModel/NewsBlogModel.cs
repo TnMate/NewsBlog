@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows;
 using Desktop.Model;
 using NewsBlog.Persistence;
@@ -108,7 +109,7 @@ namespace Desktop.ViewModel
             OnArticleCreatingStarted();
         }
 
-        private void UpdateArticle(ArticleDTO article)
+        private async void UpdateArticle(ArticleDTO article)
         {
             if (article == null)
                 return;
@@ -125,7 +126,7 @@ namespace Desktop.ViewModel
                 Leading = article.Leading
             };
 
-            LoadPicturesAsync();
+            await LoadPicturesAsync();
 
             OnArticleEditingStarted();
         }
@@ -237,16 +238,18 @@ namespace Desktop.ViewModel
             }
         }
 
-        public async void LoadPicturesAsync()
+        public async Task<bool> LoadPicturesAsync()
         {
             try
             {
                 var test = new ObservableCollection<PictureDTO>(await _service.LoadPicturesAsync(EditedArticle.Id));
                 Pictures = test;
+                return true;
             }
             catch (NetworkException ex)
             {
                 OnMessageApplication($"Váratlan hiba történt! ({ex.Message})");
+                return false;
             }
         }
     }
