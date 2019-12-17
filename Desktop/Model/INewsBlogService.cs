@@ -11,6 +11,8 @@ namespace Desktop.Model
     {
         bool IsUserLoggedIn { get; }
         Task<IEnumerable<ArticleDTO>> LoadArticlesAsync();
+        Task<Boolean> UpdateArticle(ArticleDTO article);
+        Task<Boolean> CreateArticle(ArticleDTO article);
         Task<bool> LoginAsync(string name, string password);
         Task<bool> LogoutAsync();
     }

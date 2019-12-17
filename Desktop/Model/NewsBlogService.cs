@@ -57,6 +57,32 @@ namespace Desktop.Model
             throw new NetworkException("Service returned response: " + response.StatusCode);
         }
 
+        public async Task<Boolean> CreateArticle(ArticleDTO article)
+        {
+            
+            HttpResponseMessage response = await _client.PostAsJsonAsync("api/Articles/", article);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return response.IsSuccessStatusCode;
+            }
+
+            throw new NetworkException("Service returned response: " + response.StatusCode);
+        }
+
+        public async Task<Boolean> UpdateArticle(ArticleDTO article)
+        {
+
+            HttpResponseMessage response = await _client.PutAsJsonAsync("api/Articles/", article);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return response.IsSuccessStatusCode;
+            }
+
+            throw new NetworkException("Service returned response: " + response.StatusCode);
+        }
+
         public async Task<bool> LoginAsync(string name, string password)
         {
             LoginDto user = new LoginDto

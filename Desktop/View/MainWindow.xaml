@@ -7,6 +7,32 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Menu Grid.Row="0" Grid.ColumnSpan="2">
+            <MenuItem Header="Adatbázis">
+                <MenuItem Header="Bejegyzés hozzáadása" Command="{Binding CreateArticleCommand}"/>
+                <Separator />
+                <MenuItem Header="Kilépés" Command="{Binding ExitCommand}" />
+            </MenuItem>
+        </Menu>
+        <DataGrid Name="articleGrid" Grid.Row="1" Grid.ColumnSpan="2" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Articles}" SelectedItem="{Binding SelectedArticle}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Cím" Binding="{Binding Title}" />
+                <DataGridTextColumn Header="Szerző" Binding="{Binding Author}"  />
+                <DataGridTextColumn Header="Dátum" Binding="{Binding Date}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button Content="Kijelölt módosítása" Margin="6,5,0,5" Command="{Binding UpdateArticleCommand}" CommandParameter="{Binding SelectedArticle}" Width="114"/>
+            <Button Content="Kijelölt törlése" Margin="6,5,6,5" Command="{Binding DeleteArticleCommand}" CommandParameter="{Binding SelectedArticle}" Width="114"/>
+        </StackPanel>
     </Grid>
 </Window>

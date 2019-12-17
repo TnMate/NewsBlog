@@ -14,6 +14,7 @@ namespace Desktop
         private LoginViewModel _loginViewModel;
         private MainWindow _view;
         private LoginWindow _loginView;
+        private ArticleEditorWindow _editorView;
 
         public App()
         {
@@ -55,6 +56,9 @@ namespace Desktop
         {
             _mainViewModel = new NewsBlogModel(_service);
             _mainViewModel.MessageApplication += ViewModel_MessageApplication;
+            _mainViewModel.ArticleEditingStarted += new EventHandler(MainViewModel_ArticleEditingStarted);
+            _mainViewModel.ArticleEditingFinished += new EventHandler(MainViewModel_ArticleEditingFinished);
+            _mainViewModel.ExitApplication += new EventHandler(ViewModel_ExitApplication);
 
             _view = new MainWindow
             {
@@ -63,6 +67,18 @@ namespace Desktop
 
             _view.Show();
             _loginView.Close();
+        }
+
+        private void MainViewModel_ArticleEditingStarted(object sender, EventArgs e)
+        {
+            _editorView = new ArticleEditorWindow(); // külön szerkesztő dialógus az épületekre
+            _editorView.DataContext = _mainViewModel;
+            _editorView.Show();
+        }
+
+        private void MainViewModel_ArticleEditingFinished(object sender, EventArgs e)
+        {
+            _editorView.Close();
         }
 
         private void ViewModel_LoginFailed(object sender, EventArgs e)
