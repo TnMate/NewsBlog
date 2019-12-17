@@ -11,6 +11,7 @@ namespace Desktop.ViewModel
     public class NewsBlogModel : ViewModelBase
     {
         private ObservableCollection<ArticleDTO> _articles;
+        private ObservableCollection<PictureDTO> _pictures;
         private ArticleDTO _selectedArticle;
         private readonly INewsBlogService _service;
         public ArticleDTO EditedArticle { get; private set; }
@@ -31,7 +32,6 @@ namespace Desktop.ViewModel
 
         public DelegateCommand CreateArticleCommand { get; private set; }
 
-
         public DelegateCommand DeleteArticleCommand { get; private set; }
 
         public DelegateCommand SaveChangesCommand { get; private set; }
@@ -46,6 +46,16 @@ namespace Desktop.ViewModel
             set
             {
                 _articles = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<PictureDTO> Pictures
+        {
+            get => _pictures;
+            set
+            {
+                _pictures = value;
                 OnPropertyChanged();
             }
         }
@@ -115,6 +125,8 @@ namespace Desktop.ViewModel
                 Leading = article.Leading
             };
 
+            LoadPicturesAsync();
+
             OnArticleEditingStarted();
         }
 
@@ -162,17 +174,17 @@ namespace Desktop.ViewModel
 
         private async void SaveChanges()
         {
-            if (String.IsNullOrEmpty(EditedArticle.Title))
+            if (String.IsNullOrWhiteSpace(EditedArticle.Title))
             {
                 OnMessageApplication("A cím nincs megadva!");
                 return;
             }
-            if (EditedArticle.Summary == null)
+            if (String.IsNullOrWhiteSpace(EditedArticle.Summary))
             {
                 OnMessageApplication("Az összefoglaló nincs megadva!");
                 return;
             }
-            if (EditedArticle.Content == null)
+            if (String.IsNullOrWhiteSpace(EditedArticle.Content))
             {
                 OnMessageApplication("A tartalom nincs megadva!");
                 return;
@@ -218,6 +230,19 @@ namespace Desktop.ViewModel
             {
                 var test = new ObservableCollection<ArticleDTO>(await _service.LoadArticlesAsync());
                 Articles = test;
+            }
+            catch (NetworkException ex)
+            {
+                OnMessageApplication($"Váratlan hiba történt! ({ex.Message})");
+            }
+        }
+
+        public async void LoadPicturesAsync()
+        {
+            try
+            {
+                var test = new ObservableCollection<PictureDTO>(await _service.LoadPicturesAsync(EditedArticle.Id));
+                Pictures = test;
             }
             catch (NetworkException ex)
             {

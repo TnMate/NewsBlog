@@ -72,16 +72,14 @@ namespace WebApi.Controllers
                     Leading = articleDTO.Leading
                 });
 
-                _context.SaveChanges(); // elmentjük az új épületet
+                _context.SaveChanges();
 
                 articleDTO.Id = addedArticle.Entity.Id;
 
-                // visszaküldjük a létrehozott épületet
                 return Created(Request.GetUri() + addedArticle.Entity.Id.ToString(), articleDTO);
             }
             catch
             {
-                // Internal Server Error
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }

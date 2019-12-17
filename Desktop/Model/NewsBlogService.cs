@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using NewsBlog.Persistence;
 using NewsBlog.Persistence.DTOs;
+using System.Text;
 
 namespace Desktop.Model
 {
@@ -50,6 +51,33 @@ namespace Desktop.Model
                         Leading = item.Value<Boolean>("leading")
                     };
                     test3.Add(article);
+                }
+                return test3;
+            }
+
+            throw new NetworkException("Service returned response: " + response.StatusCode);
+        }
+
+        public async Task<IEnumerable<PictureDTO>> LoadPicturesAsync(int articleId)
+        {
+
+            HttpResponseMessage response = await _client.GetAsync("api/Picture/" + articleId);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var test = await response.Content.ReadAsStringAsync();
+                var test2 = JsonConvert.DeserializeObject<dynamic>(test);
+
+                var test3 = new List<PictureDTO> { };
+                foreach (var item in test2)
+                {
+                    var picture = new PictureDTO
+                    {
+                        Id = item.Value<int>("id"),
+                        ArticleId = item.Value<int>("articleId"),
+                        Image = Encoding.ASCII.GetBytes(item.Value<string>("image"))
+                    };
+                    test3.Add(picture);
                 }
                 return test3;
             }

@@ -93,6 +93,7 @@
     <Compile Include="Model\INewsBlogService.cs" />
     <Compile Include="Model\NetworkException.cs" />
     <Compile Include="Model\NewsBlogService.cs" />
+    <Compile Include="ViewModel\Converter\PictureConverter.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MessageEventArgs.cs" />

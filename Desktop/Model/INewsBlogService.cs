@@ -11,6 +11,7 @@ namespace Desktop.Model
     {
         bool IsUserLoggedIn { get; }
         Task<IEnumerable<ArticleDTO>> LoadArticlesAsync();
+        Task<IEnumerable<PictureDTO>> LoadPicturesAsync(int articleId);
         Task<Boolean> UpdateArticle(ArticleDTO article);
         Task<Boolean> CreateArticle(ArticleDTO article);
         Task<Boolean> DeleteArticle(int articleId);

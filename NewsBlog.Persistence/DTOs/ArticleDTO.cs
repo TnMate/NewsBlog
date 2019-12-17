@@ -32,5 +32,7 @@ namespace NewsBlog.Persistence.DTOs
 
         [Required]
         public Boolean Leading { get; set; }
+
+        //public IList<PictureDTO> Images { get; set; }
     }
 }

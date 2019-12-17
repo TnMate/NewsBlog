@@ -75,6 +75,8 @@ namespace Desktop
         private void MainViewModel_ArticleDeleteFinished(object sender, EventArgs e)
         {
             MessageBox.Show("Törlés elvégezve", "Article", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+            _view.Focus();
+            _view.Show();
         }
 
         private void MainViewModel_ArticleEditingStarted(object sender, EventArgs e)
@@ -87,6 +89,8 @@ namespace Desktop
         private void MainViewModel_ArticleEditingFinished(object sender, EventArgs e)
         {
             _editorView.Close();
+            _view.Focus();
+            _view.Show();
         }
 
         private void ViewModel_LoginFailed(object sender, EventArgs e)
