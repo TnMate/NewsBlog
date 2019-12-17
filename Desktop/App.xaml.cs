@@ -74,7 +74,7 @@ namespace Desktop
 
         private void MainViewModel_ArticleDeleteFinished(object sender, EventArgs e)
         {
-            MessageBox.Show("Törlés elvégezve", "Bank", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+            MessageBox.Show("Törlés elvégezve", "Article", MessageBoxButton.OK, MessageBoxImage.Asterisk);
         }
 
         private void MainViewModel_ArticleEditingStarted(object sender, EventArgs e)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 using Desktop.Model;
 using NewsBlog.Persistence;
 using NewsBlog.Persistence.DTOs;
@@ -29,6 +30,7 @@ namespace Desktop.ViewModel
         public DelegateCommand UpdateArticleCommand { get; private set; }
 
         public DelegateCommand CreateArticleCommand { get; private set; }
+
 
         public DelegateCommand DeleteArticleCommand { get; private set; }
 
@@ -118,14 +120,14 @@ namespace Desktop.ViewModel
 
         private async void DeleteArticle(ArticleDTO article)
         {
-            if (article == null)
-                return;
+            if (MessageBox.Show("Törlés?", "Megerősítés", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                await _service.DeleteArticle(article.Id);
+                EditedArticle = null;
 
-            await _service.DeleteArticle(article.Id);
-            EditedArticle = null;
-
-            LoadAsync();
-            OnArticleDeleteFinished();
+                LoadAsync();
+                OnArticleDeleteFinished();
+            }
         }
 
         private void OnArticleCreatingStarted()
