@@ -56,6 +56,8 @@ namespace Desktop
         {
             _mainViewModel = new NewsBlogModel(_service);
             _mainViewModel.MessageApplication += ViewModel_MessageApplication;
+            _mainViewModel.ArticleCreatingStarted += new EventHandler(MainViewModel_ArticleEditingStarted);
+            _mainViewModel.ArticleCreatingFinished += new EventHandler(MainViewModel_ArticleEditingFinished);
             _mainViewModel.ArticleEditingStarted += new EventHandler(MainViewModel_ArticleEditingStarted);
             _mainViewModel.ArticleEditingFinished += new EventHandler(MainViewModel_ArticleEditingFinished);
             _mainViewModel.ExitApplication += new EventHandler(ViewModel_ExitApplication);

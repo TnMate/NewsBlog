@@ -16,11 +16,17 @@ namespace Desktop.ViewModel
 
         public event EventHandler ExitApplication;
 
+        public event EventHandler ArticleCreatingStarted;
+
+        public event EventHandler ArticleCreatingFinished;
+
         public event EventHandler ArticleEditingStarted;
 
         public event EventHandler ArticleEditingFinished;
 
         public DelegateCommand UpdateArticleCommand { get; private set; }
+
+        public DelegateCommand CreateArticleCommand { get; private set; }
 
         public DelegateCommand SaveChangesCommand { get; private set; }
 
@@ -59,9 +65,30 @@ namespace Desktop.ViewModel
             LoadAsync();
 
             ExitCommand = new DelegateCommand(param => OnExitApplication());
+            CreateArticleCommand = new DelegateCommand(param => CreateArticle());
             UpdateArticleCommand = new DelegateCommand(param => UpdateArticle(param as ArticleDTO));
             SaveChangesCommand = new DelegateCommand(param => SaveChanges());
             CancelChangesCommand = new DelegateCommand(param => CancelChanges());
+        }
+
+        private void CreateArticle()
+        {
+            /*if (article == null)
+                return;*/
+
+            EditedArticle = new ArticleDTO
+            {
+                Id = 0,
+                Title = "",
+                Author = "",
+                UserId = "",
+                Date = DateTime.Now,
+                Summary = "",
+                Content = "",
+                Leading = false
+            };
+
+            OnArticleCreatingStarted();
         }
 
         private void UpdateArticle(ArticleDTO article)
@@ -82,6 +109,18 @@ namespace Desktop.ViewModel
             };
 
             OnArticleEditingStarted();
+        }
+
+        private void OnArticleCreatingStarted()
+        {
+            if (ArticleCreatingStarted != null)
+                ArticleCreatingStarted(this, EventArgs.Empty);
+        }
+
+        private void OnArticleCreatingFinished()
+        {
+            if (ArticleCreatingFinished != null)
+                ArticleCreatingFinished(this, EventArgs.Empty);
         }
 
         private void OnArticleEditingStarted()

@@ -100,7 +100,7 @@ namespace WebApi.Controllers
                 var userId = _userManager.GetUserId(User);
 
                 article.Title = articleDTO.Title;
-                article.Date = articleDTO.Date;
+                article.Date = DateTime.Now;
                 article.Summary = articleDTO.Summary;
                 article.Content = articleDTO.Content;
                 article.Leading = articleDTO.Leading;
