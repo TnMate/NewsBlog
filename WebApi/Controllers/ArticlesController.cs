@@ -118,6 +118,25 @@ namespace WebApi.Controllers
             }
         }
 
+        // DELETE: api/Articles/5
+        [HttpDelete("{id}")]
+        public IActionResult DeleteItem([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
+            var item = _context.Articles.Find(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            _context.Articles.Remove(item);
+            _context.SaveChanges();
+
+            return Ok(item);
+        }
     }
 }

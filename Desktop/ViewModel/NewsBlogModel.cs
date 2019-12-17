@@ -20,6 +20,8 @@ namespace Desktop.ViewModel
 
         public event EventHandler ArticleCreatingFinished;
 
+        public event EventHandler ArticleDeleteFinished;
+
         public event EventHandler ArticleEditingStarted;
 
         public event EventHandler ArticleEditingFinished;
@@ -27,6 +29,8 @@ namespace Desktop.ViewModel
         public DelegateCommand UpdateArticleCommand { get; private set; }
 
         public DelegateCommand CreateArticleCommand { get; private set; }
+
+        public DelegateCommand DeleteArticleCommand { get; private set; }
 
         public DelegateCommand SaveChangesCommand { get; private set; }
 
@@ -67,6 +71,7 @@ namespace Desktop.ViewModel
             ExitCommand = new DelegateCommand(param => OnExitApplication());
             CreateArticleCommand = new DelegateCommand(param => CreateArticle());
             UpdateArticleCommand = new DelegateCommand(param => UpdateArticle(param as ArticleDTO));
+            DeleteArticleCommand = new DelegateCommand(param => DeleteArticle(param as ArticleDTO));
             SaveChangesCommand = new DelegateCommand(param => SaveChanges());
             CancelChangesCommand = new DelegateCommand(param => CancelChanges());
         }
@@ -111,6 +116,18 @@ namespace Desktop.ViewModel
             OnArticleEditingStarted();
         }
 
+        private async void DeleteArticle(ArticleDTO article)
+        {
+            if (article == null)
+                return;
+
+            await _service.DeleteArticle(article.Id);
+            EditedArticle = null;
+
+            LoadAsync();
+            OnArticleDeleteFinished();
+        }
+
         private void OnArticleCreatingStarted()
         {
             if (ArticleCreatingStarted != null)
@@ -121,6 +138,12 @@ namespace Desktop.ViewModel
         {
             if (ArticleCreatingFinished != null)
                 ArticleCreatingFinished(this, EventArgs.Empty);
+        }
+
+        private void OnArticleDeleteFinished()
+        {
+            if (ArticleDeleteFinished != null)
+                ArticleDeleteFinished(this, EventArgs.Empty);
         }
 
         private void OnArticleEditingStarted()

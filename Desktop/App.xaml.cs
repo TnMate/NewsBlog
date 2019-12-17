@@ -58,6 +58,7 @@ namespace Desktop
             _mainViewModel.MessageApplication += ViewModel_MessageApplication;
             _mainViewModel.ArticleCreatingStarted += new EventHandler(MainViewModel_ArticleEditingStarted);
             _mainViewModel.ArticleCreatingFinished += new EventHandler(MainViewModel_ArticleEditingFinished);
+            _mainViewModel.ArticleDeleteFinished += new EventHandler(MainViewModel_ArticleDeleteFinished);
             _mainViewModel.ArticleEditingStarted += new EventHandler(MainViewModel_ArticleEditingStarted);
             _mainViewModel.ArticleEditingFinished += new EventHandler(MainViewModel_ArticleEditingFinished);
             _mainViewModel.ExitApplication += new EventHandler(ViewModel_ExitApplication);
@@ -69,6 +70,11 @@ namespace Desktop
 
             _view.Show();
             _loginView.Close();
+        }
+
+        private void MainViewModel_ArticleDeleteFinished(object sender, EventArgs e)
+        {
+            MessageBox.Show("Törlés elvégezve", "Bank", MessageBoxButton.OK, MessageBoxImage.Asterisk);
         }
 
         private void MainViewModel_ArticleEditingStarted(object sender, EventArgs e)

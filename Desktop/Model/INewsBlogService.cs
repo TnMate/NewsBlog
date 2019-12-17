@@ -13,6 +13,7 @@ namespace Desktop.Model
         Task<IEnumerable<ArticleDTO>> LoadArticlesAsync();
         Task<Boolean> UpdateArticle(ArticleDTO article);
         Task<Boolean> CreateArticle(ArticleDTO article);
+        Task<Boolean> DeleteArticle(int articleId);
         Task<bool> LoginAsync(string name, string password);
         Task<bool> LogoutAsync();
     }

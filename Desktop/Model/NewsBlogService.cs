@@ -83,6 +83,18 @@ namespace Desktop.Model
             throw new NetworkException("Service returned response: " + response.StatusCode);
         }
 
+        public async Task<Boolean> DeleteArticle(int articleId)
+        {
+            HttpResponseMessage response = await _client.DeleteAsync("api/Articles/" + articleId);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return response.IsSuccessStatusCode;
+            }
+
+            throw new NetworkException("Service returned response: " + response.StatusCode);
+        }
+
         public async Task<bool> LoginAsync(string name, string password)
         {
             LoginDto user = new LoginDto
