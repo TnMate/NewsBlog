@@ -25,7 +25,7 @@ namespace Desktop.Model
             };
         }
 
-        public async Task<IEnumerable<Article>> LoadArticlesAsync()
+        public async Task<IEnumerable<ArticleDTO>> LoadArticlesAsync()
         {
             
             HttpResponseMessage response = await _client.GetAsync("api/Articles/");
@@ -35,12 +35,10 @@ namespace Desktop.Model
                 var test = await response.Content.ReadAsStringAsync();
                 var test2 = JsonConvert.DeserializeObject<dynamic>(test);
 
-                var test3 = new List<Article> { };
-                var article = new Article { };
+                var test3 = new List<ArticleDTO> { };
                 foreach (var item in test2)
                 {
-
-                    article = new Article
+                    var article = new ArticleDTO
                     {
                         Id = item.Value<int>("id"),
                         Title = item.Value<string>("title"),

@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Desktop.Model;
 using NewsBlog.Persistence;
+using NewsBlog.Persistence.DTOs;
 
 namespace Desktop.ViewModel
 {
     public class NewsBlogModel : ViewModelBase
     {
-        private ObservableCollection<Article> _articles;
+        private ObservableCollection<ArticleDTO> _articles;
         private readonly INewsBlogService _service;
 
-        public ObservableCollection<Article> Articles
+        public ObservableCollection<ArticleDTO> Articles
         {
             get => _articles;
             set
@@ -33,7 +34,7 @@ namespace Desktop.ViewModel
         {
             try
             {
-                var test = new ObservableCollection<Article>(await _service.LoadArticlesAsync());
+                var test = new ObservableCollection<ArticleDTO>(await _service.LoadArticlesAsync());
                 Articles = test;
             }
             catch (NetworkException ex)

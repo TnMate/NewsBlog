@@ -10,7 +10,7 @@ namespace Desktop.Model
     public interface INewsBlogService
     {
         bool IsUserLoggedIn { get; }
-        Task<IEnumerable<Article>> LoadArticlesAsync();
+        Task<IEnumerable<ArticleDTO>> LoadArticlesAsync();
         Task<bool> LoginAsync(string name, string password);
         Task<bool> LogoutAsync();
     }
