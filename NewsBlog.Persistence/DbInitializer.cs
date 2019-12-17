@@ -13,7 +13,7 @@ namespace NewsBlog.Persistence
         public static void Initialize(NewsBlogContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager, string imageDirectory = null)
         {
 
-            context.Database.EnsureDeleted();
+            //context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             if (context.Articles.Any())
