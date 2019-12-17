@@ -14,6 +14,6 @@ namespace NewsBlog.Persistence.DTOs
         public int ArticleId { get; set; }
 
         [Required]
-        public byte[] Image { get; set; }
+        public Byte[] Image { get; set; }
     }
 }

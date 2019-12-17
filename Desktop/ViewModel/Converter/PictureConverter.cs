@@ -10,7 +10,7 @@ namespace Desktop.ViewModel
     {
         public object Convert(Object value, Type targetType, Object parameter, CultureInfo culture)
         {
-            if (!(value is byte[]))
+            if (!(value is Byte[]))
                 return Binding.DoNothing;
 
             try
