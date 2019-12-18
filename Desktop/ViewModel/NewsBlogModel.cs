@@ -209,6 +209,12 @@ namespace Desktop.ViewModel
                 return;
             }
 
+            if (EditedArticle.Summary.Length > 1000)
+            {
+                OnMessageApplication("Túl hosszú az összefoglaló");
+                return;
+            }
+
             // mentés
             if (EditedArticle.Id == 0) // új
             {

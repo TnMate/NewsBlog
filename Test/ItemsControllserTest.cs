@@ -21,7 +21,7 @@ namespace Test
         }
 
         [Fact]
-        public async void Test_Get_Post_Delete_Articles()
+        public async void Test_Get_Articles()
         {
             // Act
             var response = await _fixture.Client.GetAsync("api/Articles/");
@@ -34,8 +34,11 @@ namespace Test
             Assert.NotNull(responseObject);
             Assert.True(responseObject.Any());
             Assert.Equal(9, responseObject.Count());
+        }
 
-            // Post
+        [Fact]
+        public async void Test_Post_Articles()
+        {
             Assert.Equal(24, _fixture.Context.Articles.Count());
 
             var test = new CreateDTO
@@ -64,14 +67,16 @@ namespace Test
             // Assert
             response2.EnsureSuccessStatusCode();
             Assert.Equal(25, _fixture.Context.Articles.Count());
+        }
 
-            //Delete
-
+        [Fact]
+        public async void Test_Delete_Articles()
+        {
+            Assert.Equal(25, _fixture.Context.Articles.Count());
             HttpResponseMessage response3 = await _fixture.Client.DeleteAsync("api/Articles/" + 1);
 
             response3.EnsureSuccessStatusCode();
             Assert.Equal(24, _fixture.Context.Articles.Count());
-
         }
 
         [Fact]
@@ -116,25 +121,5 @@ namespace Test
             Assert.Equal(article.Content, responseObject.Content);
             Assert.Equal(article.Leading, responseObject.Leading);
         }
-
-        /*
-        [Fact]
-        public async void Test_PostItem_ShouldAddItem()
-        {
-            // Arrange
-            Item item = new Item()
-            {
-                Name = "xy"
-            };
-
-            // Act
-            var content = new StringContent(JsonConvert.SerializeObject(item), Encoding.UTF8, "application/json");
-            var response = await _fixture.Client.PostAsync("api/Items", content);
-
-            // Assert
-            response.EnsureSuccessStatusCode();
-
-            Assert.NotNull(_fixture.Context.Items.FirstOrDefault(i => i.Name == "xy"));
-        }*/
     }
 }
