@@ -68,37 +68,6 @@ namespace WebApi.Controllers
             }
         }
 
-        /*[HttpPost]
-        [Authorize(Roles = "admin")]
-        public IActionResult PostPicture([FromBody] PictureDTO pictureDTOs)
-        {
-            try
-            {
-                var init = _context.Pictures.Find(pictureDTO.Id);
-                if (init == null)
-                {
-                var addedPicture = _context.Pictures.Add(new Picture
-                {
-                    ArticleId = pictureDTO.ArticleId,
-                    Image = pictureDTO.Image
-                });
-
-                _context.SaveChanges();
-
-                pictureDTO.Id = addedPicture.Entity.Id;
-
-                return Created(Request.GetUri() + addedPicture.Entity.Id.ToString(), addedPicture);
-                }
-
-                return Ok();
-            }
-            catch
-            {
-                // Internal Server Error
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-        }*/
-
         // DELETE: api/Picture/5
         [HttpDelete("{id}")]
         public IActionResult DeleteItem([FromRoute] int id)
