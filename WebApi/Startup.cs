@@ -1,21 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NewsBlog.Persistence;
-using NewsBlog.Website.Services;
 
-namespace NewsBlog.Website
+namespace WebApi
 {
     public class Startup
     {
@@ -44,8 +36,6 @@ namespace NewsBlog.Website
                 .AddEntityFrameworkStores<NewsBlogContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddTransient<NewsBlogService>();
-
             services.AddMvc();
         }
 
@@ -54,31 +44,17 @@ namespace NewsBlog.Website
         {
             if (env.IsDevelopment())
             {
-                app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
-
-            app.UseStatusCodePages();
-
-            app.UseStaticFiles();
 
             app.UseAuthentication();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Articles}/{action=Index}/{id?}");
-            });
+            app.UseMvc();
 
+            // Adatbázis inicializálása
             DbInitializer.Initialize(app.ApplicationServices.GetRequiredService<NewsBlogContext>(),
                 app.ApplicationServices.GetRequiredService<UserManager<User>>(),
-                app.ApplicationServices.GetRequiredService<RoleManager<IdentityRole > >(),
+                app.ApplicationServices.GetRequiredService<RoleManager<IdentityRole>>(),
                 Configuration.GetValue<string>("ImageStore"));
         }
     }
