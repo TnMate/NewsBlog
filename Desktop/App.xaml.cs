@@ -116,13 +116,13 @@ namespace Desktop
         {
             _editorView = new ArticleEditorWindow(); // külön szerkesztő dialógus az épületekre
             _editorView.DataContext = _mainViewModel;
+            _view.Hide();
             _editorView.Show();
         }
 
         private void MainViewModel_ArticleEditingFinished(object sender, EventArgs e)
         {
             _editorView.Close();
-            _view.Focus();
             _view.Show();
         }
 
