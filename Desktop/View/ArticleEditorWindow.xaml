@@ -53,6 +53,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel Grid.Row="5" Orientation="Horizontal" Grid.ColumnSpan="2" HorizontalAlignment="Right">
+            <Button Content="Új kép hozzáadása" Margin="6,5,0,5" Command="{Binding AddPictureCommand}" CommandParameter="{Binding EditedArticle}" Width="120"/>
             <Button Content="Mentés" Margin="6,5,0,5" Command="{Binding SaveChangesCommand}" Width="100" />
             <Button Content="Mégse" Margin="5,5,6,5" Command="{Binding CancelChangesCommand}" Width="100" />
         </StackPanel>

@@ -327,7 +327,7 @@ namespace NewsBlog.Persistence
                     {
                         ArticleId = defaultArticles[0].Id,
                         Image = File.ReadAllBytes(path),
-                        //ImageLarge = File.ReadAllBytes(largePath)
+                        //ImageLarge = File.ReadAllbytes(largePath)
                     });
                 }
                 path = Path.Combine(imageDirectory, "two.png");
@@ -338,7 +338,7 @@ namespace NewsBlog.Persistence
                     {
                         ArticleId = defaultArticles[1].Id,
                         Image = File.ReadAllBytes(path),
-                        //ImageLarge = File.ReadAllBytes(largePath)
+                        //ImageLarge = File.ReadAllbytes(largePath)
                     });
                 }
 
@@ -350,7 +350,7 @@ namespace NewsBlog.Persistence
                     {
                         ArticleId = defaultArticles[2].Id,
                         Image = File.ReadAllBytes(path),
-                        //ImageLarge = File.ReadAllBytes(largePath)
+                        //ImageLarge = File.ReadAllbytes(largePath)
                     });
                 }
 
@@ -362,19 +362,19 @@ namespace NewsBlog.Persistence
                     {
                         ArticleId = defaultArticles[3].Id,
                         Image = File.ReadAllBytes(path),
-                        //ImageLarge = File.ReadAllBytes(largePath)
+                        //ImageLarge = File.ReadAllbytes(largePath)
                     });
                     defaultPictures.Add(new Picture
                     {
                         ArticleId = defaultArticles[2].Id,
                         Image = File.ReadAllBytes(path),
-                        //ImageLarge = File.ReadAllBytes(largePath)
+                        //ImageLarge = File.ReadAllbytes(largePath)
                     });
                     defaultPictures.Add(new Picture
                     {
                         ArticleId = defaultArticles[1].Id,
                         Image = File.ReadAllBytes(path),
-                        //ImageLarge = File.ReadAllBytes(largePath)
+                        //ImageLarge = File.ReadAllbytes(largePath)
                     });
                 }
 

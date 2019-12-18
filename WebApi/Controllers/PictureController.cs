@@ -38,22 +38,28 @@ namespace WebApi.Controllers
         // POST
         [HttpPost]
         [Authorize(Roles = "admin")]
-        public IActionResult PostPicture([FromBody] PictureDTO articleDTO)
+        public IActionResult PostPicture([FromBody] IEnumerable<PictureDTO> pictureDTOs)
         {
             try
             {
-                var addedPicture = _context.Pictures.Add(new Picture
+                foreach (var pictureDTO in pictureDTOs)
                 {
-                    ArticleId = articleDTO.ArticleId,
-                    Image = articleDTO.Image
-                });
+                    var init = _context.Pictures.Find(pictureDTO.Id);
+                    if (init == null)
+                    {
+                        var addedPicture = _context.Pictures.Add(new Picture
+                        {
+                            ArticleId = pictureDTO.ArticleId,
+                            Image = pictureDTO.Image
+                        });
 
-                _context.SaveChanges(); // elmentjük az új épületet
+                        _context.SaveChanges();
 
-                articleDTO.Id = addedPicture.Entity.Id;
+                        pictureDTO.Id = addedPicture.Entity.Id;
+                    }
+                }
 
-                // visszaküldjük a létrehozott épületet
-                return Created(Request.GetUri() + addedPicture.Entity.Id.ToString(), articleDTO);
+                return Ok();
             }
             catch
             {
@@ -61,6 +67,37 @@ namespace WebApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
+        /*[HttpPost]
+        [Authorize(Roles = "admin")]
+        public IActionResult PostPicture([FromBody] PictureDTO pictureDTOs)
+        {
+            try
+            {
+                var init = _context.Pictures.Find(pictureDTO.Id);
+                if (init == null)
+                {
+                var addedPicture = _context.Pictures.Add(new Picture
+                {
+                    ArticleId = pictureDTO.ArticleId,
+                    Image = pictureDTO.Image
+                });
+
+                _context.SaveChanges();
+
+                pictureDTO.Id = addedPicture.Entity.Id;
+
+                return Created(Request.GetUri() + addedPicture.Entity.Id.ToString(), addedPicture);
+                }
+
+                return Ok();
+            }
+            catch
+            {
+                // Internal Server Error
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }*/
 
         // DELETE: api/Picture/5
         [HttpDelete("{id}")]

@@ -10,10 +10,9 @@ namespace Desktop.ViewModel
     {
         public object Convert(Object value, Type targetType, Object parameter, CultureInfo culture)
         {
-            if (!(value is Byte[]))
+            if (!(value is byte[]))
                 return Binding.DoNothing;
-
-            try
+try
             {
                 using (MemoryStream stream = new MemoryStream(value as byte[])) // a képet a memóriába egy adatfolyamba helyezzük
                 {

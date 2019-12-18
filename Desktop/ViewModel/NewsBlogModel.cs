@@ -29,11 +29,15 @@ namespace Desktop.ViewModel
 
         public event EventHandler ArticleEditingFinished;
 
+        public event EventHandler<PictureEventArgs> AddPictureStarted;
+
         public DelegateCommand UpdateArticleCommand { get; private set; }
 
         public DelegateCommand CreateArticleCommand { get; private set; }
 
         public DelegateCommand DeleteArticleCommand { get; private set; }
+
+        public DelegateCommand AddPictureCommand { get; private set; }
 
         public DelegateCommand SaveChangesCommand { get; private set; }
 
@@ -82,6 +86,7 @@ namespace Desktop.ViewModel
             LoadAsync();
 
             ExitCommand = new DelegateCommand(param => OnExitApplication());
+            AddPictureCommand = new DelegateCommand(param => OnAddPictureStarted((param as ArticleDTO).Id));
             CreateArticleCommand = new DelegateCommand(param => CreateArticle());
             UpdateArticleCommand = new DelegateCommand(param => UpdateArticle(param as ArticleDTO));
             DeleteArticleCommand = new DelegateCommand(param => DeleteArticle(param as ArticleDTO));
@@ -133,7 +138,7 @@ namespace Desktop.ViewModel
 
         private async void DeleteArticle(ArticleDTO article)
         {
-            if (MessageBox.Show("Törlés?", "Megerősítés", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            if (article != null && MessageBox.Show("Törlés?", "Megerősítés", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 await _service.DeleteArticle(article.Id);
                 EditedArticle = null;
@@ -173,6 +178,12 @@ namespace Desktop.ViewModel
                 ArticleEditingFinished(this, EventArgs.Empty);
         }
 
+        private void OnAddPictureStarted(int articleId)
+        {
+            if (AddPictureStarted != null)
+                AddPictureStarted(this, new PictureEventArgs { ArticleId = articleId });
+        }
+
         private async void SaveChanges()
         {
             if (String.IsNullOrWhiteSpace(EditedArticle.Title))
@@ -190,22 +201,24 @@ namespace Desktop.ViewModel
                 OnMessageApplication("A tartalom nincs megadva!");
                 return;
             }
-            /*if (EditedArticle.Leading == true)
+            if (EditedArticle.Leading == true && Pictures.Count < 1)
             {
-                OnMessageApplication("KÉPFELTÖLTÉS");
+                OnMessageApplication("Vezető cikkhez 1 kép minimum");
                 return;
-            }*/
+            }
 
             // mentés
             if (EditedArticle.Id == 0) // új
             {
-                await _service.CreateArticle(EditedArticle);
+                await _service.CreateArticle(EditedArticle, Pictures);
                 Articles.Add(EditedArticle);
+                //await _service.AddImagesAsync(Pictures);
                 SelectedArticle = EditedArticle;
             }
             else // Frissítés
             {
                 await _service.UpdateArticle(EditedArticle);
+                await _service.AddImagesAsync(Pictures);
             }
 
             EditedArticle = null;
@@ -229,8 +242,8 @@ namespace Desktop.ViewModel
         {
             try
             {
-                var test = new ObservableCollection<ArticleDTO>(await _service.LoadArticlesAsync());
-                Articles = test;
+                Articles = new ObservableCollection<ArticleDTO>(await _service.LoadArticlesAsync());
+                Pictures = new ObservableCollection<PictureDTO>();
             }
             catch (NetworkException ex)
             {

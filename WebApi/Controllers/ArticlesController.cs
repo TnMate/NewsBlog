@@ -56,27 +56,35 @@ namespace WebApi.Controllers
 
         [HttpPost]
         [Authorize(Roles = "admin")]
-        public IActionResult PostArticle([FromBody] ArticleDTO articleDTO)
+        public IActionResult PostArticle([FromBody] CreateDTO createDTO)
         {
             try
             {
                 var userId = _userManager.GetUserId(User);
                 var addedArticle = _context.Articles.Add(new Article
                 {
-                    Title = articleDTO.Title,
+                    Title = createDTO.Article.Title,
                     Author = _context.Users.Find(userId).Name,
                     UserId = userId,
                     Date = DateTime.Now,
-                    Summary = articleDTO.Summary,
-                    Content = articleDTO.Content,
-                    Leading = articleDTO.Leading
+                    Summary = createDTO.Article.Summary,
+                    Content = createDTO.Article.Content,
+                    Leading = createDTO.Article.Leading
                 });
+                
+                createDTO.Article.Id = addedArticle.Entity.Id;
+                foreach (var item in createDTO.Images)
+                {
+                    _context.Pictures.Add(new Picture
+                    {
+                        ArticleId = addedArticle.Entity.Id,
+                        Image = item.Image
+                    });
+                }
 
                 _context.SaveChanges();
 
-                articleDTO.Id = addedArticle.Entity.Id;
-
-                return Created(Request.GetUri() + addedArticle.Entity.Id.ToString(), articleDTO);
+                return Created(Request.GetUri() + addedArticle.Entity.Id.ToString(), createDTO);
             }
             catch
             {
@@ -131,7 +139,12 @@ namespace WebApi.Controllers
                 return NotFound();
             }
 
+            var items = _context.Pictures.Where(i => i.ArticleId == id);
             _context.Articles.Remove(item);
+            foreach (var a in items)
+            {
+                _context.Pictures.Remove(a);
+            }
             _context.SaveChanges();
 
             return Ok(item);

@@ -1,9 +1,11 @@
-﻿using System;
-using System.Configuration;
+﻿using Microsoft.Win32;
+using System;
 using System.Windows;
 using Desktop.Model;
 using Desktop.View;
 using Desktop.ViewModel;
+using NewsBlog.Persistence.DTOs;
+using System.Configuration;
 
 namespace Desktop
 {
@@ -56,6 +58,7 @@ namespace Desktop
         {
             _mainViewModel = new NewsBlogModel(_service);
             _mainViewModel.MessageApplication += ViewModel_MessageApplication;
+            _mainViewModel.AddPictureStarted += new EventHandler<PictureEventArgs>(MainViewModel_AddPictureStarted);
             _mainViewModel.ArticleCreatingStarted += new EventHandler(MainViewModel_ArticleEditingStarted);
             _mainViewModel.ArticleCreatingFinished += new EventHandler(MainViewModel_ArticleEditingFinished);
             _mainViewModel.ArticleDeleteFinished += new EventHandler(MainViewModel_ArticleDeleteFinished);
@@ -70,6 +73,36 @@ namespace Desktop
 
             _view.Show();
             _loginView.Close();
+        }
+
+        private void MainViewModel_AddPictureStarted(object sender, PictureEventArgs e)
+        {
+            try
+            {
+                // egy dialógusablakban bekérjük a fájlnevet
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.CheckFileExists = true;
+                dialog.Filter = "Képfájlok|*.jpg;*.jpeg;*.bmp;*.tif;*.gif;*.png;";
+                dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+                Boolean? result = dialog.ShowDialog();
+
+                if (result == true)
+                {
+                    // kép létrehozása (a megfelelő méretekkel)
+
+                    var test = new PictureDTO
+                    {
+                        ArticleId = e.ArticleId,
+                        Image = PictureHandler.OpenAndResize(dialog.FileName, 100)
+                    };
+
+                    //_service.AddImageAsync(test);
+                    _mainViewModel.Pictures.Add(test);
+                    _editorView.DataContext = _mainViewModel;
+                    _editorView.Show();
+                }
+            }
+            catch { }
         }
 
         private void MainViewModel_ArticleDeleteFinished(object sender, EventArgs e)

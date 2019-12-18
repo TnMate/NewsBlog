@@ -98,6 +98,8 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MessageEventArgs.cs" />
     <Compile Include="ViewModel\NewsBlogModel.cs" />
+    <Compile Include="ViewModel\PictureEventArgs.cs" />
+    <Compile Include="ViewModel\PictureHandler.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
