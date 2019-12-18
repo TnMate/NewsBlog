@@ -73,10 +73,13 @@ namespace Test
         public async void Test_Delete_Articles()
         {
             Assert.Equal(25, _fixture.Context.Articles.Count());
-            HttpResponseMessage response3 = await _fixture.Client.DeleteAsync("api/Articles/" + 1);
+            HttpResponseMessage response3 = await _fixture.Client.DeleteAsync("api/Articles/" + 3);
 
             response3.EnsureSuccessStatusCode();
             Assert.Equal(24, _fixture.Context.Articles.Count());
+
+            var response2 = await _fixture.Client.GetAsync("api/Articles/" + 3);
+            Assert.False(response2.IsSuccessStatusCode);
         }
 
         [Fact]
