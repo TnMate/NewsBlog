@@ -55,16 +55,18 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public IActionResult PostArticle([FromBody] CreateDTO createDTO)
         {
             try
             {
                 var userId = _userManager.GetUserId(User);
+                var test2 = _userManager.GetUserName(User);
+                //var test = _context.Users.Find(userId).Name;
                 var addedArticle = _context.Articles.Add(new Article
                 {
                     Title = createDTO.Article.Title,
-                    Author = _context.Users.Find(userId).Name,
+                    Author = test2,
                     UserId = userId,
                     Date = DateTime.Now,
                     Summary = createDTO.Article.Summary,
@@ -93,7 +95,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public IActionResult PutArticle([FromBody] ArticleDTO articleDTO)
         {
             try
@@ -111,7 +113,7 @@ namespace WebApi.Controllers
                 article.Content = articleDTO.Content;
                 article.Leading = articleDTO.Leading;
 
-                _context.Update(article);
+                _context.Articles.Update(article);
 
                 _context.SaveChanges(); // elmentjük a módosított épületet
 

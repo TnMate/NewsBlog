@@ -111,6 +111,8 @@ namespace Desktop.ViewModel
                 Leading = false
             };
 
+            Pictures = new ObservableCollection<PictureDTO>();
+
             OnArticleCreatingStarted();
         }
 

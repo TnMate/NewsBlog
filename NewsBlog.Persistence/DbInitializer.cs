@@ -69,7 +69,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Title1.1",
-                    Author = user2.Name,
+                    Author = user2.UserName,
                     UserId = user2.Id,
                     Date = DateTime.Now.AddDays(-5),
                     Summary = "Summary1",
@@ -79,7 +79,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Title1",
-                    Author = user2.Name,
+                    Author = user2.UserName,
                     UserId = user2.Id,
                     Date = DateTime.Now.AddDays(-5),
                     Summary = "Summary1",
@@ -89,7 +89,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Németek nyernek",
-                    Author = user2.Name,
+                    Author = user2.UserName,
                     UserId = user2.Id,
                     Date = DateTime.Now.AddDays(-2),
                     Summary = "A harmadik világtáncversenyen elsők lettek",
@@ -99,7 +99,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Csontok",
-                    Author = user1.Name,
+                    Author = user1.UserName,
                     UserId = user1.Id,
                     Date = DateTime.Now.AddDays(-6),
                     Summary = "Hol ásták el a csontokat",
@@ -109,7 +109,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Magyarok nyernek",
-                    Author = user1.Name,
+                    Author = user1.UserName,
                     UserId = user1.Id,
                     Date = DateTime.Now.AddDays(-1),
                     Summary = "Nyertek egy sporton belül",
@@ -119,7 +119,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Szerencse",
-                    Author = user1.Name,
+                    Author = user1.UserName,
                     UserId = user1.Id,
                     Date = DateTime.Now.AddDays(-3),
                     Summary = "Valaki visszaadta egy gyerek elveszett 50m forintját",
@@ -129,7 +129,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Balszerencse",
-                    Author = user1.Name,
+                    Author = user1.UserName,
                     UserId = user1.Id,
                     Date = DateTime.Now.AddDays(-4),
                     Summary = "Valaki megtalálta egy gyerek elveszett 50m forintját",
@@ -139,7 +139,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Title2",
-                    Author = user3.Name,
+                    Author = user3.UserName,
                     UserId = user3.Id,
                     Date = DateTime.Now.AddDays(-6),
                     Summary = "Summary2",
@@ -149,7 +149,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Title3",
-                    Author = user1.Name,
+                    Author = user1.UserName,
                     UserId = user1.Id,
                     Date = DateTime.Now.AddDays(-7),
                     Summary = "Summary3",
@@ -159,7 +159,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Title4",
-                    Author = user3.Name,
+                    Author = user3.UserName,
                     UserId = user3.Id,
                     Date = DateTime.Now.AddDays(-8),
                     Summary = "Summary4",
@@ -169,7 +169,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Title5",
-                    Author = user1.Name,
+                    Author = user1.UserName,
                     UserId = user1.Id,
                     Date = DateTime.Now.AddDays(-9),
                     Summary = "Summary5",
@@ -179,7 +179,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Title2.2",
-                    Author = user2.Name,
+                    Author = user2.UserName,
                     UserId = user2.Id,
                     Date = DateTime.Now.AddDays(-6),
                     Summary = "Summary2",
@@ -189,7 +189,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Title3.3",
-                    Author = user2.Name,
+                    Author = user2.UserName,
                     UserId = user2.Id,
                     Date = DateTime.Now.AddDays(-7),
                     Summary = "Summary3",
@@ -199,7 +199,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Title4.4",
-                    Author = user4.Name,
+                    Author = user4.UserName,
                     UserId = user4.Id,
                     Date = DateTime.Now.AddDays(-8),
                     Summary = "Summary4",
@@ -209,7 +209,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Valami amerika",
-                    Author = user4.Name,
+                    Author = user4.UserName,
                     UserId = user4.Id,
                     Date = DateTime.Now.AddDays(-4),
                     Summary = "Valamiféle filmről szoló dolog akar ez lenni",
@@ -219,7 +219,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Sok csoki",
-                    Author = user3.Name,
+                    Author = user3.UserName,
                     UserId = user3.Id,
                     Date = DateTime.Now.AddDays(-3),
                     Summary = "Milyen jó a fehér csoki",
@@ -229,7 +229,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Minden jó ha a vége jó",
-                    Author = user2.Name,
+                    Author = user2.UserName,
                     UserId = user2.Id,
                     Date = DateTime.Now.AddDays(-6),
                     Summary = "Ez egy romantikus filmről szól",
@@ -239,7 +239,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Öregedés ellenszere",
-                    Author = user3.Name,
+                    Author = user3.UserName,
                     UserId = user3.Id,
                     Date = DateTime.Now.AddDays(-2),
                     Summary = "Öregedés ellenszere a drogok",
@@ -249,7 +249,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Egyszer volt hol nem volt",
-                    Author = user1.Name,
+                    Author = user1.UserName,
                     UserId = user1.Id,
                     Date = DateTime.Now.AddDays(-3),
                     Summary = "Hét törpe és egy gonosz kisfiú",
@@ -259,7 +259,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Mikrofonok",
-                    Author = user4.Name,
+                    Author = user4.UserName,
                     UserId = user4.Id,
                     Date = DateTime.Now.AddDays(-1),
                     Summary = "Melyik mikrofont válassza karrierjéhez",
@@ -269,7 +269,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Title valami",
-                    Author = user3.Name,
+                    Author = user3.UserName,
                     UserId = user3.Id,
                     Date = DateTime.Now.AddDays(-4),
                     Summary = "Valami filmről bisztos szól",
@@ -279,7 +279,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Out of ideas?",
-                    Author = user1.Name,
+                    Author = user1.UserName,
                     UserId = user1.Id,
                     Date = DateTime.Now,
                     Summary = "Ötletem sincs mit írja ide",
@@ -289,7 +289,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Ennyi már csak elég lesz",
-                    Author = user2.Name,
+                    Author = user2.UserName,
                     UserId = user2.Id,
                     Date = DateTime.Now.AddDays(-1),
                     Summary = "Ez az utolsó, ugye?",
@@ -299,7 +299,7 @@ namespace NewsBlog.Persistence
                 new Article
                 {
                     Title = "Title5.5",
-                    Author = user2.Name,
+                    Author = user2.UserName,
                     UserId = user2.Id,
                     Date = DateTime.Now.AddDays(-9),
                     Summary = "Summary5",
